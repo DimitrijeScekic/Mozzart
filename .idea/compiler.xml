@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Mozzart" />
+        <module name="Dimitrije_Scekic_Mozzart_ZadatakZaTestiranje" />
       </profile>
     </annotationProcessing>
   </component>

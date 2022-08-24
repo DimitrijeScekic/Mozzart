@@ -1,92 +1,51 @@
 package test;
 
 import base.BaseTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import page.*;
-
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Month;
-
-import static java.lang.Thread.sleep;
-import static org.junit.Assert.assertTrue;
-//import static page.PageHelper.scroolToElement;
-
 
 public class NewUserRegistrationTest extends BaseTest {
 
     MainPage mainPage;
     LoginPage loginPage;
     RegistrationPage registrationPage;
-    PageHelper pageHelper;
 
-
-    @Before
+    @BeforeTest
     public void setUpLoginTest() {
         loginPage = new LoginPage();
         mainPage = new MainPage();
         registrationPage = new RegistrationPage();
-        pageHelper = new PageHelper();
-    }
+          }
 
     @Test
     public void newUserSuccessRegistration() throws InterruptedException {
         String username = "Tester1";
         String email = "tester1@gmail.com";
         String password1 = "Testnipass1!";
+        Actions action = new Actions(driver);
 
         mainPage.sacuvajZatvoriButtonClick();
         mainPage.popUpNotificationCancelling();
         mainPage.logoButtonClick();
         mainPage.registrujSeButtonClick();
-       // registrationPage.setUsernameField(pageHelper.randomString(8));
         registrationPage.setUsernameField(username);
-       // registrationPage.setEmailAddressField(pageHelper.generateRandomEmail(6));
         registrationPage.setEmailAddressField(email);
-        String password = pageHelper.generatePassword();
-       // registrationPage.setPassswordField(password);
-       // registrationPage.setConfirmPasswordField(password);
+        String password = registrationPage.generatePassword();
         registrationPage.setPassswordField(password1);
         registrationPage.setConfirmPasswordField(password1);
-
         registrationPage.daljeButtonClick();
-
-        registrationPage.setFirstNameField(PageHelper.randomIme());
-        registrationPage.setLastNameField(PageHelper.randomPrezime());
-        // registrationPage.selectRandomDayFromList();
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("document.getElementById('firstName').setAttribute('value', 'Milan');");
+        Thread.sleep(2000);
+        jse.executeScript("document.getElementById('lastName').setAttribute('value', 'Scekic');");
         registrationPage.selectPromoCheckBox();
+        Thread.sleep(2000);
 
-        registrationPage.setOtvoriNalogButton();
-
-/*
-
-        String privredniSubjekat = pageHelper.randomPrivredniSubjekat();
-        String mesto = pageHelper.randomMesto();
-        String adresa = pageHelper.randomAdresa();
-        String ime = pageHelper.randomPrezime();
-        String prezime = pageHelper.randomAdresa();
-        String rocnost = pageHelper.randomRocnost();
-        String dvoBroj = pageHelper.randInt(1, 98);
-        String troBroj = pageHelper.randInt(100, 998);
-        String petBroj = pageHelper.randInt(10000, 99998);
-        String sestBroj = pageHelper.randInt(100000, 999998);
-        String osmBroj = pageHelper.randInt(10000000, 99999998);
-        String devetBroj = pageHelper.randInt(100000000, 999999998);
-
-   */
+        action.sendKeys(Keys.ENTER).build().perform();
 
     }
-
-
-
-
-
-   /* @After
-    public void tearDown() {
-        driver.quit();
-    }*/
 }
