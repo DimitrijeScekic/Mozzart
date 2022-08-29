@@ -9,5 +9,8 @@
         <module name="Dimitrije_Scekic_Mozzart_ZadatakZaTestiranje" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Mozzart" target="12" />
+    </bytecodeTargetLevel>
   </component>
 </project>
